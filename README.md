@@ -66,24 +66,25 @@ OR (x2): https://www.kaggle.com/datasets/zaheenhamidani/ultimate-spotify-tracks-
 Shape: (232 725, 18)
 
 Columns:
- 0   genre             232725 non-null  object 
- 1   artist_name       232725 non-null  object 
- 2   track_name        232725 non-null  object 
- 3   track_id          232725 non-null  object 
- 4   popularity        232725 non-null  int64   
- 5   acousticness      232725 non-null  float64
- 6   danceability      232725 non-null  float64
- 7   duration_ms       232725 non-null  int64  
- 8   energy            232725 non-null  float64
- 9   instrumentalness  232725 non-null  float64
- 10  key               232725 non-null  object 
- 11  liveness          232725 non-null  float64
- 12  loudness          232725 non-null  float64
- 13  mode              232725 non-null  object 
- 14  speechiness       232725 non-null  float64
- 15  tempo             232725 non-null  float64
- 16  time_signature    232725 non-null  object 
- 17  valence           232725 non-null  float64
+
+ 0. genre             232725 non-null  object 
+ 1. artist_name       232725 non-null  object 
+ 2. track_name        232725 non-null  object 
+ 3. track_id          232725 non-null  object
+ 4. popularity        232725 non-null  int64 
+ 5. acousticness      232725 non-null  float64
+ 6. danceability      232725 non-null  float64
+ 7. duration_ms       232725 non-null  int64  
+ 8. energy            232725 non-null  float64
+ 9. instrumentalness  232725 non-null  float64
+ 10. key               232725 non-null  object 
+ 11. liveness          232725 non-null  float64
+ 12. loudness          232725 non-null  float64
+ 13. mode              232725 non-null  object 
+ 14. speechiness       232725 non-null  float64
+ 15. tempo             232725 non-null  float64
+ 16. time_signature    232725 non-null  object 
+ 17. valence           232725 non-null  float64
  
  # Models used
  
