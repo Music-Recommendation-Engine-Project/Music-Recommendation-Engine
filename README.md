@@ -3,6 +3,8 @@
 A recommendation system for music and song recommendations is a project that uses machine learning algorithms to analyse data on user's listening habits and recommend new songs that they may be interested in. 
 Recommendation systems are widely used in the music industry. One of the reasons they have become so ubiquitous is due to the fact that online listener behaviour is characterised by cognitive biases - users prefer to take mental shortcuts rather than evaluate a large range of music choices on a daily basis. RS provides these mental shortcuts by offering personalised recommendations based on the user’s preferences.
 
+Frontend Preview: https://www.figma.com/proto/d80N8dn5vyP8Eww70624hW/Final-PC?node-id=2%3A2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A2
+
 # Valuable Variables
 
 - Song Lyrics and Sentiment Analysis of the song
