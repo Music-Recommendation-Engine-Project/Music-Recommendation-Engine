@@ -21,71 +21,69 @@ Frontend Preview: https://www.figma.com/proto/d80N8dn5vyP8Eww70624hW/Final-PC?no
 
 # Dataset 
 
-1M Song Dataset Challenge: https://www.ee.columbia.edu/~dpwe/pubs/McFeeBEL12-MSDC.pdf (original paper)
-The Problems:
-Dataset is quite old 
-Some useful links expired —> lack of updated resources
-Dataset conversion to ready-to-use form will take some time
+The first step was preparing the data related to users and songs from various sources, which become the main dataset for the modelling. This way every fundamental feature is included. The data related to common IDs between the Echo Nest and Spotify APIs was also extracted and combined into a single data frame. This part of the project aimed to ensure the data was clean, accurate, and ready for further analysis and integration into other applications.
 
+Data Sources: 
+Triplets dataset contained information about users' interactions with songs, including user IDs, song IDs, and play counts. 
+ # fd50c4007b68a3737fe052d5a4f78ce8aa117f3d    SOBONKR12A58A7A7E0    1
+Songid_name dataset: This dataset contained song information, including song IDs, song names, and artist names.
+# TRYYXOR128F92D7391<SEP>SOYIIVT12AAF3B3F1F<SEP>Blue Highway<SEP>Only
+Tracks dataset from Spotify API: This dataset contains song information, including song IDs, artist names, and track URIs.
+['track_uri', 'track_name', 'popularity', 'duration_ms', 'explicit', 'artists', 'id_artists', 'release_date', 'danceability', 'energy', 'key', 'loudness', 'mode', 'speechiness', 'acousticness', 'instrumentalness', 'liveness', 'valence', ‘'tempo', 'time_signature']
 
-1,000,000 songs / files
-273 GB of data
-44,745 unique artists
-7,643 unique terms (The Echo Nest tags)
-2,321 unique musicbrainz tags
-43,943 artists with at least one term
-2,201,916 asymmetric similarity relationships
-515,576 dated tracks starting from 1922
-18,196 cover songs identified
+ETL Process:
+Extract: The data extracted is related to users and songs from the Triplets and Songid_name datasets. Song-related data was also extracted from the Tracks dataset from the Spotify API.
+Transform: Then the data was transformed to ensure it was in a suitable format for merging and analysis. For example, columns were renamed, duplicates filtered, and relevant information was selected. The first artist and ID were selected from several sources for each artist to ensure consistency in the data.
+Load: Next, the transformed data is loaded into a single data frame called df_users_songMD, which contains all the relevant information related to users' songs.
+Extract and Transform: Then data that is related to standard IDs between the Echo Nest and Spotify APIs is extracted. All the songs' IDs and track URI are selected and combined into a single data frame using the song_id and track_uri columns. Then the data is transformedto remove duplicates and group by song_id to create a unique list of track_uris associated with each song_id.
+Data Quality: Throughout the ETL process, it was ensured that the data was clean, accurate, and consistent. It was also verified that all data fields were correctly formatted and no null or missing values existed.
 
-On Top of That:
-1. Lyrics — musiXmatch dataset, matching exactly 237,662 tracks (but the full dataset of lyrics is 779k songs. The difference comes from the fact that from 779k, instrumental songs were removed, as well as duplicates, and copyright-violation songs. 
-  - The lyrics come in bag-of-words format: each track is described as the word-counts for a dictionary of the top 5,000 words ( 210,519 training bag-of-words, 27,143 testing ones) across the set. Although copyright issues prevent us from distributing the full, original lyrics, we hope and believe that this format is for many purposes just as useful, and may be easier to use.
-  - Matches provided by musiXmatch based on artist names and song titles from the Million Song Dataset.
-  - Why use bag-of-words and not the original lyrics? → The actual lyrics are protected by copyright and we do not have permissions to redistribute them. 
-Stemming Applied
+It successfully completed the ETL process for users and songs data and common IDs between the Echo Nest and Spotify APIs. It was ensured the data was clean, accurate, and consistent throughout the process. The final data frame, df_users_songMD, contains all the relevant information about users' songs. The combined data frame with the common IDs allows for further analysis and integration with other applications.
 
-2. Tags (such as rock, jazz) – Last.fm
-943,347 matched tracks MSD
-
-3. User Data (user, song, play count)  — Echo.nest
-1,019,318 unique users
-384,546 unique MSD songs
-48,373,586 user - song - play count triplets
-
-https://archive.org/details/thisismyjam-datadump which provides spotify_uri+ followers+ likes
-
-4. Genre Tags 1
-5. More features
-6. Taste Profiles
-
-Other datasets (): 
-https://developer.spotify.com/discover/
-https://www.youtube.com/watch?v=goUzHd7cTuA&ab_channel=MarkKoh
-Ready Datasets: https://research.atspotify.com/datasets/ , https://www.kaggle.com/datasets/lehaknarnauli/spotify-datasets?select=artists.csv 
-OR scrape our own dataset 
-OR (x2): https://www.kaggle.com/datasets/zaheenhamidani/ultimate-spotify-tracks-db (!)
-Shape: (232 725, 18)
-
-Columns:
-
- 0. genre             232725 non-null  object 
- 1. artist_name       232725 non-null  object 
- 2. track_name        232725 non-null  object 
- 3. track_id          232725 non-null  object
- 4. popularity        232725 non-null  int64 
- 5. acousticness      232725 non-null  float64
- 6. danceability      232725 non-null  float64
- 7. duration_ms       232725 non-null  int64  
- 8. energy            232725 non-null  float64
- 9. instrumentalness  232725 non-null  float64
- 10. key               232725 non-null  object 
- 11. liveness          232725 non-null  float64
- 12. loudness          232725 non-null  float64
- 13. mode              232725 non-null  object 
- 14. speechiness       232725 non-null  float64
- 15. tempo             232725 non-null  float64
- 16. time_signature    232725 non-null  object 
- 17. valence           232725 non-null  float64
  
  # Models used
+  
+  The Modelling process consisted of building four different models and observing their performance. 
+The models built were the following:
+ 
+·       Popularity-based Recommendation System
+The popularity-based system is based on the count of user ids for each unique song. It has the following principal steps:
+1)     Get a count of user ids for each unique song as a recommendation score
+2)     Sort the songs based on the scores 
+3)     Generate a recommendation rank based on the score
+4)     Generate top ten recommendations according to the rank
+ 
+It is tested using precision and recall. 
+
+ 
+·       Item Similarity-based Collaborative Filtering Model
+The system works by calculating the similarity between user songs and all unique songs in the training data. It has the following principal steps:
+1)     Get unique songs of a given user
+2)     Get unique users for a given song
+3)     Get unique songs in the training data
+4)     Construct a cooccurrence matrix by calculating the similarities between the songs associated with a user and all unique songs
+5)     Generate top ten recommendations based on the cooccurrence matrix
+ 
+It is tested using precision and recall.
+It can be observed that the Item-Similarity based Collaborative Filtering Model outperforms the Popularity-based Recommendation System.
+
+ 
+·       K-Means Clustering
+The recommendation system clusters songs by implementing K-Means using sklearn library and generates recommendations according to the clusters. It has the following principal steps:
+1)     Find optimal number of clusters using the Elbow method
+2)     Fit the K-means model
+3)     Add a column with the corresponding clusters
+4)     Find out the maximum occurring cluster number according to user’s favorite track types
+5)     Sort the cluster numbers and find out the number which occurs the most
+6)     Get the tracks of that cluster and print the first five rows of the dataframe having that cluster number as their type
+ 
+It is tested using the silhouette score – 0.52 on a scale from -1 to 1.
+ 
+·       Matrix Factorization using SVD
+The Matrix Factorization system aims to generate recommendations using SVD. In addition, it uses cosine similarity to find similar songs. It has the following principal steps:
+1)    Add ratings column to the dataset based on the listen count of each user
+2)    Keep only popular songs and active users
+3)    Transform the database into a matrix (user id as index, track id as columns, ratings as values)
+4)    Apply SVD
+5)    Use cosine similarity to find similarities between the songs
+
