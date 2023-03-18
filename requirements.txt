@@ -9,4 +9,3 @@ polars
 pylab-sdk
 kneed
 pyspark
-pickle
