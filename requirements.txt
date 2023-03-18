@@ -1,3 +1,12 @@
 nbformat
 nbconvert
 ipykernel
+matplotlib
+pandas
+numpy
+sklearn
+polars
+pylab
+kneed
+pyspark
+pickle
