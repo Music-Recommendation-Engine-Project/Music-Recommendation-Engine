@@ -1,5 +1,3 @@
-os
-sys
 unittest
 nbformat
 nbconvert
