@@ -6,7 +6,7 @@ pandas
 numpy
 sklearn
 polars
-pylab
+pylab-sdk
 kneed
 pyspark
 pickle
