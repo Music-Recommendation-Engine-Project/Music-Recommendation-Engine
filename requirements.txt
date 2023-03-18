@@ -4,7 +4,7 @@ ipykernel
 matplotlib
 pandas
 numpy
-sklearn
+scikit-learn
 polars
 pylab-sdk
 kneed
