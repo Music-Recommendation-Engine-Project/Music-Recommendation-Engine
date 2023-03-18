@@ -19,7 +19,7 @@ class TestNotebooks(unittest.TestCase):
                 nb = nbformat.read(f, as_version=4)
             # Execute the notebook and print which one is being executed
             print("Testing notebook: " + notebook)
-            ep = ExecutePreprocessor(timeout=600, kernel_name='python 3.10')
+            ep = ExecutePreprocessor(timeout=600, kernel_name='python3.10')
             ep.preprocess(nb, {'metadata': {'path': '.'}})
             # Check for errors
             errors = [output for cell in nb.cells if "outputs" in cell for output in cell["outputs"] if output.output_type == "error"]
