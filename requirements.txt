@@ -1,2 +1,3 @@
 nbformat
 nbconvert
+ipykernel
