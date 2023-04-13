@@ -5,7 +5,7 @@ Recommendation systems are widely used in the music industry. One of the reasons
 
 Frontend Preview: https://www.figma.com/proto/d80N8dn5vyP8Eww70624hW/Final-PC?node-id=2%3A2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A2
 
-# Valuable Variables
+## Valuable Variables
 
 - Song Lyrics and Sentiment Analysis of the song
 - Binary Encoded songs
@@ -23,30 +23,25 @@ Frontend Preview: https://www.figma.com/proto/d80N8dn5vyP8Eww70624hW/Final-PC?no
 
 The first step was preparing the data related to users and songs from various sources, which become the main dataset for the modelling. This way every fundamental feature is included. The data related to common IDs between the Echo Nest and Spotify APIs was also extracted and combined into a single data frame. This part of the project aimed to ensure the data was clean, accurate, and ready for further analysis and integration into other applications.
 
-Data Sources: 
-Triplets dataset contained information about users' interactions with songs, including user IDs, song IDs, and play counts. 
- # fd50c4007b68a3737fe052d5a4f78ce8aa117f3d    SOBONKR12A58A7A7E0    1
-Songid_name dataset: This dataset contained song information, including song IDs, song names, and artist names.
-# TRYYXOR128F92D7391<SEP>SOYIIVT12AAF3B3F1F<SEP>Blue Highway<SEP>Only
-Tracks dataset from Spotify API: This dataset contains song information, including song IDs, artist names, and track URIs.
-['track_uri', 'track_name', 'popularity', 'duration_ms', 'explicit', 'artists', 'id_artists', 'release_date', 'danceability', 'energy', 'key', 'loudness', 'mode', 'speechiness', 'acousticness', 'instrumentalness', 'liveness', 'valence', ‘'tempo', 'time_signature']
+### Data Sources: 
+First, the Triplets dataset provided information about users' interactions with songs, including user IDs, song IDs, and play counts. This dataset was used to extract user and song information, which was later used to create a list of unique users and their associated songs. Next, the Songid_name dataset contained song information, including song IDs, song names, and artist names. This dataset was used to extract song names and artist names to enhance our information about the songs. Lastly, the Tracks dataset from the Spotify API was used, which contained song information such as song IDs, artist names, and track URIs. This dataset was used to extract track URIs for each song, which were later used to combine the data from the Echo Nest and Spotify APIs.
+During the Extract phase, PySpark was used to read and extract the relevant data from the datasets. To handle the large datasets, techniques such as partitioning and caching were used to optimize the performance of the code. Additionally, some datasets had missing or incorrect data, which were handled carefully to ensure that the ETL process would be unaffected.
 
-ETL Process:
-Extract: The data extracted is related to users and songs from the Triplets and Songid_name datasets. Song-related data was also extracted from the Tracks dataset from the Spotify API.
-Transform: Then the data was transformed to ensure it was in a suitable format for merging and analysis. For example, columns were renamed, duplicates filtered, and relevant information was selected. The first artist and ID were selected from several sources for each artist to ensure consistency in the data.
-Load: Next, the transformed data is loaded into a single data frame called df_users_songMD, which contains all the relevant information related to users' songs.
-Extract and Transform: Then data that is related to standard IDs between the Echo Nest and Spotify APIs is extracted. All the songs' IDs and track URI are selected and combined into a single data frame using the song_id and track_uri columns. Then the data is transformedto remove duplicates and group by song_id to create a unique list of track_uris associated with each song_id.
-Data Quality: Throughout the ETL process, it was ensured that the data was clean, accurate, and consistent. It was also verified that all data fields were correctly formatted and no null or missing values existed.
+### Transform Phase:
+In the Transform phase, PySpark was used to transform the extracted data into a suitable format for merging and analysis. In addition, the data was cleaned and standardized to remove duplicates and inconsistencies. The data was also transformed to include additional columns such as song names, artist names, and track URIs to create a comprehensive list of information about users' songs.
 
-It successfully completed the ETL process for users and songs data and common IDs between the Echo Nest and Spotify APIs. It was ensured the data was clean, accurate, and consistent throughout the process. The final data frame, df_users_songMD, contains all the relevant information about users' songs. The combined data frame with the common IDs allows for further analysis and integration with other applications.
+### Load Phase:
+In the Load phase, the transformed data was loaded into a single data frame called df_users_songMD. This data frame contains all the relevant information about users' songs, including user IDs, song IDs, play counts, song names, artist names, and track URIs. In addition, a unique list of track URIs associated with each song ID was also created by grouping the data by song ID and removing duplicates.
+An improvement that was attempted was the vectorization of playlists for each song. The data was extracted from one of Spotify's APIs, providing one million playlists containing an average of sixty songs. However, the dataset could have been more manageable regarding size and quality. The unique song IDs were common and had different names and artists, resulting in several problems. 
 
+A decision was made only to select the first artist, which reduced nearly half the dataset when filtering. The investigation and testing of the vectorisation revealed that the number of unique playlists and their assigned IDs was chaotic, which was resolved after fixing a coding error. However, it did not work either, resulting in more issues related to character encoding and duplicate names. After combining the playlist-transformed data with the metadata, only thirty thousand songs in common were found out of a balanced one million to two hundred thousand songs. Therefore, the decision was made not to use the playlist data.
  
- # Models used
+ ## Models used
   
   The Modelling process consisted of building four different models and observing their performance. 
 The models built were the following:
  
-·       Popularity-based Recommendation System
+### Popularity-based Recommendation System
 The popularity-based system is based on the count of user ids for each unique song. It has the following principal steps:
 1)     Get a count of user ids for each unique song as a recommendation score
 2)     Sort the songs based on the scores 
@@ -56,7 +51,7 @@ The popularity-based system is based on the count of user ids for each unique so
 It is tested using precision and recall. 
 
  
-·       Item Similarity-based Collaborative Filtering Model
+### Item Similarity-based Collaborative Filtering Model
 The system works by calculating the similarity between user songs and all unique songs in the training data. It has the following principal steps:
 1)     Get unique songs of a given user
 2)     Get unique users for a given song
@@ -68,7 +63,7 @@ It is tested using precision and recall.
 It can be observed that the Item-Similarity based Collaborative Filtering Model outperforms the Popularity-based Recommendation System.
 
  
-·       K-Means Clustering
+### K-Means Clustering
 The recommendation system clusters songs by implementing K-Means using sklearn library and generates recommendations according to the clusters. It has the following principal steps:
 1)     Find optimal number of clusters using the Elbow method
 2)     Fit the K-means model
@@ -79,7 +74,7 @@ The recommendation system clusters songs by implementing K-Means using sklearn l
  
 It is tested using the silhouette score – 0.52 on a scale from -1 to 1.
  
-·       Matrix Factorization using SVD
+### Matrix Factorization using SVD
 The Matrix Factorization system aims to generate recommendations using SVD. In addition, it uses cosine similarity to find similar songs. It has the following principal steps:
 1)    Add ratings column to the dataset based on the listen count of each user
 2)    Keep only popular songs and active users
