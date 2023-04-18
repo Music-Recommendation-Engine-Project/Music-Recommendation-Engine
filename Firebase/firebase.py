@@ -1,6 +1,10 @@
+import os
 import firebase_admin
 from firebase_admin import credentials
-import json
+from dotenv import load_dotenv
 
-cred = credentials.Certificate(json.loads("${{ secrets.SAK }}"))
+# Load the service account key from an environment variable
+load_dotenv()
+cert = os.environ.get('SERVICE_ACCOUNT_KEY')
+cred = credentials.Certificate(cert)
 firebase_admin.initialize_app(cred)
