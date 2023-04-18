@@ -1,7 +1,19 @@
+import os
+import base64
 import firebase_admin
 from firebase_admin import credentials
 import json
 import subprocess
+from dotenv import load_dotenv
+
+# Load the service account key from an environment variable
+load_dotenv()
+cert = os.environ.get('SERVICE_ACCOUNT_KEY')
+
+# Decode and write the service account key to a json file
+with open('serviceAccountKey.json', 'wb') as f:
+  f.write(base64.b64decode(cert))
+
 
 # Specify the encoding when opening the file
 with open('serviceAccountKey.json', encoding='latin1') as f: # or whatever encoding your file uses
