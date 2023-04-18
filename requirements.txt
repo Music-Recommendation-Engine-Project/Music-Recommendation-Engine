@@ -1,0 +1,12 @@
+nbformat
+nbconvert
+ipykernel
+matplotlib
+pandas
+numpy
+scikit-learn
+polars
+pylab-sdk
+kneed
+pyspark
+pyarrow
