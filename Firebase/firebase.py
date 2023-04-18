@@ -6,5 +6,4 @@ from dotenv import load_dotenv
 # Load the service account key from an environment variable
 load_dotenv()
 cert = os.environ.get('SERVICE_ACCOUNT_KEY')
-cred = credentials.Certificate(cert)
-firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app(cert)
