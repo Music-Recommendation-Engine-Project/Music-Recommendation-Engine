@@ -11,3 +11,4 @@ kneed
 pyspark
 pyarrow
 firebase_admin
+dotenv
