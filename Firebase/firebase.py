@@ -1,5 +1,6 @@
 import firebase_admin
 from firebase_admin import credentials
+import json
 
-cred = credentials.Certificate("${{ secrets.SAK }}")
+cred = credentials.Certificate(json.loads("${{ secrets.SAK }}"))
 firebase_admin.initialize_app(cred)
