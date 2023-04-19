@@ -13,3 +13,4 @@ pyarrow
 firebase_admin
 fsspec
 gcsfs
+pyrebase

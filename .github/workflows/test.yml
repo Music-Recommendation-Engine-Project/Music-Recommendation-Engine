@@ -34,5 +34,7 @@ jobs:
           json: ${{ secrets.FIREBASE_JSON }}
       - name: Set Up Firebase
         run: python Firebase/firebase.py
+      - name: Download Data
+        run: python Firebase/data_file.py
       - name: Run Tests
         run: python tests/test-notebooks.py
