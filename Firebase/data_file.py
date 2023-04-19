@@ -1,14 +1,19 @@
-import pyrebase
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import storage
 
-config = {
-  "apiKey": "${{ secrets.FIREBASE_API_KEY }}",
-  "authDomain": "${{ secrets.FIREBASE_AUTH_DOM }}",
-  "databaseURL": "${{ secrets.FIREBASE_DATA_URL }}",
-  "storageBucket": "${{ secrets.FIREBASE_STG_BKT }}"
-}
+cred = credentials.Certificate("./Firebase/serviceAccountKey.json")
+firebase_admin.initialize_app(cred, {
+    'storageBucket': "${{ secrets.FIREBASE_STG_BKT }}"
+})
 
-firebase = pyrebase.initialize_app(config)
+from google.cloud import storage
 
-storage = firebase.storage()
+# Get a reference to the bucket
+bucket = storage.bucket()
 
-storage.child("user_track_df.parquet").download("./Firebase/user_track_df.parquet")
+# Get a reference to the file object
+blob = bucket.blob("user_track_df.parquet")
+
+# Download the file to a local path
+blob.download_to_filename("./Firebase/user_track_df.parquet")
