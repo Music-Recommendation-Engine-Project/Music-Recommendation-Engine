@@ -9,6 +9,7 @@ from nbconvert.preprocessors import ExecutePreprocessor
 class TestNotebooks(unittest.TestCase):
     def test_notebooks(self):
         # Get the list of notebooks in any part of the repository
+        print("Testing notebooks in the repository")
         notebooks = [os.path.join(root, name)
                         for root, dirs, files in os.walk(".") for name in files
                         if name.endswith(".ipynb")]
@@ -17,7 +18,6 @@ class TestNotebooks(unittest.TestCase):
             if notebook.startswith("ETL"):
                 continue
             # Open the notebook
-            print("Opening notebook: " + notebook)
             with open(notebook) as f:
                 nb = nbformat.read(f, as_version=4)
             # Execute the notebook and print which one is being executed
