@@ -1,10 +1,11 @@
+import os
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import storage
 
 cred = credentials.Certificate("./Firebase/serviceAccountKey.json")
 firebase_admin.initialize_app(cred, {
-    'storageBucket': "${{ secrets.FIREBASE_STG_BKT }}"
+    'storageBucket': os.environ['bucket']
 })
 
 # Get a reference to the bucket

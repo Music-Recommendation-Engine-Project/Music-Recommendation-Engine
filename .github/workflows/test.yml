@@ -35,6 +35,8 @@ jobs:
       - name: Set Up Firebase
         run: python Firebase/firebase.py
       - name: Download Data
+        env:
+          bucket: ${{ secrets.FIREBASE_STG_BKT }}
         run: python Firebase/data_file.py
       - name: Run Tests
         run: python tests/test-notebooks.py
