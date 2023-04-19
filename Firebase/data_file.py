@@ -7,8 +7,6 @@ firebase_admin.initialize_app(cred, {
     'storageBucket': "${{ secrets.FIREBASE_STG_BKT }}"
 })
 
-from google.cloud import storage
-
 # Get a reference to the bucket
 bucket = storage.bucket()
 
