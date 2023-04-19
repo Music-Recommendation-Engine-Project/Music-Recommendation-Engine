@@ -32,7 +32,7 @@ jobs:
         with:
           name: "./Firebase/serviceAccountKey.json"
           json: ${{ secrets.FIREBASE_JSON }}
-      - name: Run tests
-        # Run the file with the tests in the tests folder (not pytest)
+      - name: Set Up Firebase
         run: python Firebase/firebase.py
-             python tests/test-notebooks.py
+      - name: Run Tests
+        run: python tests/test-notebooks.py
