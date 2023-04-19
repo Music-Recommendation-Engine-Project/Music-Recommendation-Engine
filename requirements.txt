@@ -12,3 +12,4 @@ pyspark
 pyarrow
 firebase_admin
 fsspec
+gcsfs
