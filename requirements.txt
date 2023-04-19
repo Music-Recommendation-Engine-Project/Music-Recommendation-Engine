@@ -10,4 +10,4 @@ pylab-sdk
 kneed
 pyspark
 pyarrow
-gdown
+firebase_admin
