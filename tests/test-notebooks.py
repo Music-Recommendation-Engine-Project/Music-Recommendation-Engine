@@ -17,6 +17,7 @@ class TestNotebooks(unittest.TestCase):
             if notebook.startswith("ETL"):
                 continue
             # Open the notebook
+            print("Opening notebook: " + notebook)
             with open(notebook) as f:
                 nb = nbformat.read(f, as_version=4)
             # Execute the notebook and print which one is being executed
