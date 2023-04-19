@@ -27,16 +27,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python3.10 -m ipykernel install --user --name python3.10
-      - name: Create JSON
-        uses: jsdaniell/create-json@v1.2.2
-        with:
-          name: "./Firebase/serviceAccountKey.json"
-          json: ${{ secrets.FIREBASE_JSON }}
-      - name: Set Up Firebase
-        run: python Firebase/firebase.py
-      - name: Download Data
-        env:
-          bucket: ${{ secrets.FIREBASE_STG_BKT }}
-        run: python Firebase/data_file.py
       - name: Run Tests
         run: python tests/test-notebooks.py
