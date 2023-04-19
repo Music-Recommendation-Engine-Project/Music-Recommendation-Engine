@@ -2,7 +2,7 @@
 import requests
 
 # Define the GitHub URL of the file to download
-github_url = "https://github.com/Music-Recommendation-Engine-Project/Data-Music-Repo/blob/main/user_track_df.parquet"
+github_url = "https://github.com/Music-Recommendation-Engine-Project/Data-Music-Repo/raw/main/user_track_df.parquet"
 
 # Send a GET request to the URL and get the content as bytes
 response = requests.get(github_url)
