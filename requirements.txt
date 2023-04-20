@@ -2,7 +2,7 @@ nbformat
 nbconvert
 ipykernel
 matplotlib
-pandas==1.5.3
+pandas
 numpy
 scikit-learn
 polars
