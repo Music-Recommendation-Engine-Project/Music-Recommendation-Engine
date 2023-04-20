@@ -12,3 +12,4 @@ pyspark
 pyarrow
 pytest
 pytest-xdist
+requests
