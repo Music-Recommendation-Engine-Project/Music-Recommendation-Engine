@@ -14,3 +14,4 @@ pytest
 pytest-xdist
 requests
 nbmake
+xgboost
