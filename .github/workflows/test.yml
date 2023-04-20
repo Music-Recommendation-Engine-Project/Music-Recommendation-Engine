@@ -30,4 +30,4 @@ jobs:
       - name: Download file
         run: python download.py
       - name: Run Tests
-        run: pytest --nbmake -n=auto "." --ignore=ETL/ --ignore=EDA.ipynb
+        run: pytest --nbmake -n=auto "." --ignore=ETL/
