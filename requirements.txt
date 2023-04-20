@@ -10,8 +10,5 @@ pylab-sdk
 kneed
 pyspark
 pyarrow
-firebase_admin
-fsspec
-gcsfs
-google
 pytest
+pytest-xdist
