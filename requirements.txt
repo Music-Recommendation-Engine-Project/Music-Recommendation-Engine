@@ -15,3 +15,7 @@ pytest-xdist
 requests
 nbmake
 xgboost
+seaborn
+tensorflow
+tdqm
+pytest-timeout
