@@ -14,3 +14,4 @@ firebase_admin
 fsspec
 gcsfs
 google
+pytest
