@@ -171,7 +171,7 @@ if artist_name:
     st.markdown('</div>', unsafe_allow_html=True)
     artist_found=True
 else:
-    st.write('There must be an error. Check whether you type the artist correctly.')
+    st.write("Waiting for your artist's name...")
     artist_found=False
     
 if artist_found:
