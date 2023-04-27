@@ -101,6 +101,7 @@ if artist_name:
     if response.status_code == 200:
         similar_artists = response.json()
         artist_found = True
+        st.write('Author Found! Using internal engine to recommend artists...')
     else:
         st.write('No author found! Make sure to write the name correctly.')
         artist_found = False
