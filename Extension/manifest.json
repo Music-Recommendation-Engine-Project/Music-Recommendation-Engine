@@ -11,7 +11,7 @@
         "default_icon": "icon_small.png"
     },
     "icons":{
-        "48": "icon.png",
+        "48": "icon_normal.png",
         "16": "icon_small.png"
     },
     "content_security_policy": {
