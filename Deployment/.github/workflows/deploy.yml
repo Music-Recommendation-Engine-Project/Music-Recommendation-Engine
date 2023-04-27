@@ -6,6 +6,10 @@ on:
       - main
       - FrontEnd
 
+defaults:
+  run:
+    working-directory: Deployment
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest
