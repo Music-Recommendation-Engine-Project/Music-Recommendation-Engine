@@ -13,6 +13,10 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+      # Set working directory to subdirectory
+      working-directory: './deployment'
 
     - name: Log in to Heroku Container Registry
       run: docker login --username ${{ secrets.HEROKU_USERNAME }} --password ${{ secrets.HEROKU_API_KEY }} registry.heroku.com
