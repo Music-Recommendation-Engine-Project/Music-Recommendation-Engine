@@ -88,3 +88,65 @@ st.markdown('<div class="title">Spotify Artist Search</div>', unsafe_allow_html=
 st.markdown('<div class="input-container">', unsafe_allow_html=True)
 artist_name = st.text_input("Enter artist name:")
 num_items=6
+artist_found = False
+if artist_name:
+    url = f"https://artists_api-1-g4538820.deta.app/find_similar_artists?artist={artist_name}&num_items={num_items}"
+    headers = {
+        "Content-Type": "application/json",
+        "X-API-Key": os.environ["DETA_API"]
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        similar_artists = response.json()
+        artist_found = True
+    else:
+        st.write('No author found! Make sure to write the name correctly.')
+        artist_found = False
+
+    st.markdown('</div>', unsafe_allow_html=True)
+    if artist_found:
+        for artist_name in similar_artists[1:]:
+            if artist_name:
+                # Search for artist
+                results = sp.search(q='artist:' + artist_name, type='artist')
+                items = results['artists']['items']
+
+                if len(items) > 0:
+                    # Get top tracks of artist
+                    artist_id = items[0]['id']
+                    top_tracks = sp.artist_top_tracks(artist_id)
+
+                    # Output top tracks
+                    with st.container():
+                        st.markdown('<div class="track-container">', unsafe_allow_html=True)
+                        st.write('Author: ', artist_name)
+                        i = 0
+                        for track in top_tracks['tracks']:
+                            if i <= 5:
+                                i += 1
+                                track_info = track
+                                track_name = track_info['name']
+                                track_uri = track_info['uri']
+                                track_image_url = track_info['album']['images'][0]['url']
+                                preview_url = track_info['preview_url']
+
+                                with st.container():
+                                    if preview_url is not None:
+                                        # Get the Spotify player widget using the Spotify URI
+                                        spotify_widget_uri = f"https://open.spotify.com/embed/track/{track_uri.split(':')[-1]}"
+
+                                        # Create the iframe element with the Spotify player widget
+                                        spotify_player_html = f"""
+                                            <iframe src="{spotify_widget_uri}" width="100%" height="80%" frameborder="0" allowtransparency="true" allow="encrypted-media" style="min-width: 250px; max-width: 440px;"></iframe>
+                                        """
+
+                                        # Display the Spotify player widget in your Streamlit app
+                                        html(spotify_player_html)
+                                    else:
+                                        st.write('No preview available')
+                            st.markdown('</div>', unsafe_allow_html=True)
+
+            else:
+                st.write("No similar artists found.")
