@@ -81,7 +81,7 @@ def play_track(access_token, track_uri):
     else:
         st.write(f"Failed to start playing the track. Status code: {response.status_code}")
         
- def find_similar_artists_spotify(artist_name, num_artists=5):
+def find_similar_artists_spotify(artist_name, num_artists=5):
     # Search for the artist
     result = sp.search(q='artist:' + artist_name, type='artist')
     items = result['artists']['items']
@@ -94,6 +94,53 @@ def play_track(access_token, track_uri):
     related_artists = sp.artist_related_artists(artist_id)['artists']
     return [related_artist['name'] for related_artist in related_artists[:num_artists]]
 
+#Some Styling
+st.markdown(
+    """
+    <style>
+    .main-container {
+        padding: 3rem;
+    }
+    .title {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+    }
+    .input-container {
+        margin-bottom: 2rem;
+    }
+    .track-container {
+        justify-content: space-between;
+    }
+    .track {
+        width: 30%;
+        margin-bottom: 2rem;
+        border: 1px solid #ddd;
+        border-radius: 50px;
+        padding: 1rem;
+        text-align: center;
+    }
+    .track-image {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    .spotify-button {
+        background-color: #1DB954;
+        color: #fff;
+        font-weight: bold;
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        text-decoration: none;
+    }
+    widget_style{
+            width: 100%;
+            height: 100vh;
+            border: none;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 #Streamlit App code
 st.markdown('<div class="main-container">', unsafe_allow_html=True)
