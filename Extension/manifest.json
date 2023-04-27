@@ -1,0 +1,32 @@
+{
+  "name": "Artist Recommender",
+  "version": "1.0",
+  "description": "Recommendation of Artists based on machine learning algorithms. The extension also allows to play songs of the recommended artists.",
+  "manifest_version": 3,
+  "host_permissions": ["https://accounts.spotify.com/*", "https://api.spotify.com/*"],
+  "author": "Bartosz Rzycki",
+  "action":{
+        "default_popup": "index.html",
+        "default_title": "Artist Recommender",
+        "default_icon": "icon_small.png"
+    },
+    "icons":{
+        "48": "icon.png",
+        "16": "icon_small.png"
+    },
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'; default-src 'self' 'unsafe-inline' https://*.spotify.com"     
+    },
+    "permissions": [
+        "identity",
+        "identity.email"
+    ],
+    "web_accessible_resources": [
+  {
+    "resources": [ "spotify_auth/*" ],
+    "matches": [ "https://accounts.spotify.com/*" ],
+    "use_dynamic_url": true
+  }
+]
+
+}
