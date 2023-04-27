@@ -1,0 +1,26 @@
+name: Deploy to Heroku
+
+on:
+  push:
+    branches:
+      - main
+      - FrontEnd
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Log in to Heroku Container Registry
+      run: docker login --username ${{ secrets.HEROKU_USERNAME }} --password ${{ secrets.HEROKU_API_KEY }} registry.heroku.com
+
+    - name: Build and push Docker image
+      run: |
+        docker build -t registry.heroku.com/song-recommender2023/web .
+        docker push registry.heroku.com/song-recommender2023/web
+    - name: Deploy to Heroku
+      run: |
+        curl -X PATCH https://api.heroku.com/apps/song-recommender2023/formation -H "Content-Type: application/json" -H "Accept: application/vnd.heroku+json; version=3.docker" -H "Authorization: Bearer ${{ secrets.HEROKU_API_KEY }}" -d '{"updates":[{"type":"web","docker_image":"'$(docker inspect registry.heroku.com/song-recommender2023/web --format={{.Id}})'"}]}'
