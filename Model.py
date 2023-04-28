@@ -8,11 +8,11 @@ from io import BytesIO, StringIO
 from deta import Deta  # Import Deta
 
 # Initialize with a Project Key
-project_key = os.environ(["DETA_PROJECT_KEY"])
+project_key = os.environ["DETA_PROJECT_KEY"]
 deta = Deta(project_key)
 
 # This how to connect to or create a database.
-database_name = os.environ(["DETA_DATABASE_NAME"])
+database_name = os.environ["DETA_DATABASE_NAME"]
 drive = deta.Drive(database_name)
 
 
