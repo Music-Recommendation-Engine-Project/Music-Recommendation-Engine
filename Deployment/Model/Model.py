@@ -1,3 +1,4 @@
+import uvicorn
 import os
 import numpy as np
 import pandas as pd
@@ -5,10 +6,6 @@ from fastapi import FastAPI
 from typing import List
 from io import BytesIO, StringIO
 from deta import Deta  # Import Deta
-
-#Deploying the model on Deta Space
-#https://docs.deta.sh/docs/micros/node_tutorial
-#Neccessary: Spacefile, requiremetns.txt, model.py
 
 # Initialize with a Project Key
 project_key = os.environ(["DETA_PROJECT_KEY"])
@@ -77,6 +74,7 @@ def find_similar_artists(artist=None, num_items=10, item_lookup=None, item_facto
 
 
 app = FastAPI()
+
 
 @app.get("/find_similar_artists", response_model=List[str])
 async def find_similar_artists_route(artist: str, num_items: int = 10):
