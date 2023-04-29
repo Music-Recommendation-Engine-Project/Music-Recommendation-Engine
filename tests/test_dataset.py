@@ -1,9 +1,9 @@
-import pandas as pd
+from musicrecolib.dataset import load_data
 
 def test_dataset():
-    df = pd.read_parquet("user_track_df.parquet", engine='pyarrow')
+    df = load_data.LoadData().get_users_songs()
     assert df.shape == (11793648, 24)
 
 def test_dataset_read():
-    df = pd.read_parquet("user_track_df.parquet", engine='pyarrow')
+    df = load_data.LoadData().get_users_songs()
     assert df['artist_name'][0] == 'Jorge Drexler'
