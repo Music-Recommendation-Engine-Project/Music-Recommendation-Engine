@@ -15,14 +15,6 @@ deta = Deta(project_key)
 database_name = os.environ["DETA_DATABASE_NAME"]
 drive = deta.Drive(database_name)
 
-#for connection with different websites and for Chrome Extension
-@app.middleware("http")
-async def add_cors_headers(request, call_next):
-    response = await call_next(request)
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
-    return response
 
 def load_embeddings():
     #Lookup table for artists that we can use
@@ -83,6 +75,14 @@ def find_similar_artists(artist=None, num_items=10, item_lookup=None, item_facto
 
 app = FastAPI()
 
+#for connection with different websites and for Chrome Extension
+@app.middleware("http")
+async def add_cors_headers(request, call_next):
+    response = await call_next(request)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return response
 
 @app.get("/find_similar_artists", response_model=List[str])
 async def find_similar_artists_route(artist: str, num_items: int = 10):
