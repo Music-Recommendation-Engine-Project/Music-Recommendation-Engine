@@ -41,5 +41,5 @@ setup(
     install_requires=install_requires,
     package_dir={"musicrecolib": "musicrecolib"},
     python_requires=">=3.6, <3.11.1",
-    packages=find_packages(where=".", exclude=["examples", "tests"])
+    packages=find_packages(where=".", exclude=["examples", "tests", "Deployment", "Extension", "Front-End", "Procfile", "heroku.yml", "requirements.txt"])
 )
