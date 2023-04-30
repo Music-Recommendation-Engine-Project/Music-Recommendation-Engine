@@ -5,16 +5,15 @@ import pandas as pd
 from fastapi import FastAPI
 from typing import List
 from io import BytesIO, StringIO
-from deta import Deta  # Import Deta
+from deta import Deta  # Import Deta for storage
 
 # Initialize with a Project Key
-project_key = os.environ(["DETA_PROJECT_KEY"])
+project_key = os.environ["DETA_PROJECT_KEY"]
 deta = Deta(project_key)
 
 # This how to connect to or create a database.
-database_name = os.environ(["DETA_DATABASE_NAME"])
+database_name = os.environ["DETA_DATABASE_NAME"]
 drive = deta.Drive(database_name)
-
 
 def load_embeddings():
     #Lookup table for artists that we can use
@@ -40,7 +39,6 @@ def load_embeddings():
     item_biases_stream.close()
 
     return loaded_factors, loaded_biases, item_lookup
-
 
 def find_similar_artists(artist=None, num_items=10, item_lookup=None, item_factors=None, item_biases=None):
     if item_factors is None or item_biases is None or item_lookup is None:
@@ -69,12 +67,19 @@ def find_similar_artists(artist=None, num_items=10, item_lookup=None, item_facto
         artist_scores.append(scores[idx])
 
     similar = pd.DataFrame({'artist': artists, 'score': artist_scores})
-
     return artists
 
 
 app = FastAPI()
 
+#for connection with different websites and for Chrome Extension
+@app.middleware("http")
+async def add_cors_headers(request, call_next):
+    response = await call_next(request)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return response
 
 @app.get("/find_similar_artists", response_model=List[str])
 async def find_similar_artists_route(artist: str, num_items: int = 10):

@@ -3,8 +3,13 @@ name: Deploy to Heroku
 on:
   push:
     branches:
+      - main
       - Deployment
-
+      
+defaults:
+  run:
+    working-directory: Deployment
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -23,11 +28,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r Deployment/requirements.txt
 
+    - name: Move Procfile to root directory
+      run: |
+        cp Deployment/Procfile Procfile
+
     - name: Deploy to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: "artist-api2023"
         heroku_email: ${{ secrets.HEROKU_USERNAME }}
-        appdir: "Deployment"
+        appdir: Deployment
         buildpacks: "https://github.com/heroku/heroku-buildpack-python.git"
