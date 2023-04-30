@@ -162,7 +162,7 @@ num_items=6
 artist_found=False
 
 if artist_name:
-    url = f"https://artists_api-1-g4538820.deta.app/find_similar_artists?artist={artist_name}&num_items={num_items}"
+    url = f"https://artist-api2023.herokuapp.com/find_similar_artists?artist={artist_name}&num_items={num_items}"
     headers = {
         "Content-Type": "application/json",
         "X-API-Key": os.environ["DETA_API"]
