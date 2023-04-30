@@ -38,5 +38,5 @@ jobs:
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: "artist-api2023"
         heroku_email: ${{ secrets.HEROKU_USERNAME }}
-        appdir: "."
+        appdir: Deployment
         buildpacks: "https://github.com/heroku/heroku-buildpack-python.git"
