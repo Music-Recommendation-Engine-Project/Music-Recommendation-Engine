@@ -91,7 +91,7 @@ First part of productionalization of the solution is a web application hosted on
 3. Get set of recommended artists using Bayesian Personalized Ranking (BPR) model deployed. 
    * If artist was not found in the database, recommendation using Spotify recommender is retrived. 
 5. For each recommended artists, the most popular songs are provided.
-6. User can list to those songs directly inside the web application. 
+6. User can listen to those songs directly inside the web application. 
 
 Application is deployed using Dockerfile and heroku.yml files. 
 
