@@ -71,6 +71,12 @@ The recommendation system clusters songs by implementing K-Means using sklearn l
 6)     Get the tracks of that cluster and print the first five rows of the dataframe having that cluster number as their type
  
 It is tested using the silhouette score – 0.52 on a scale from -1 to 1.
+
+### DBSCAN with ANNOY Nearest Neighbor
+Using listening history of hundreds of users, the notebook analyzes potential segments of users based on the type (similiarty) of songs. First, search of optimal hyperparameters for DBSCAN is run and the best results produce a silhouette score of 0.76 which is 0.24 improvement compared to K-means. Then the ANNOY Nearest Neighbor finds the neighbors inside the given cluster. At the end, performance when it comes to recall and speed are summarized: Recall of 1.00 while the Annoy query time of 0.000185 seconds which is faster than exhaustive query time: 0.005821 seconds.
+
+### DBSCAN with Hnswlib Nearest Neighbor
+Using listening history of hundreds of users, the notebook analyzes potential segments of users based on the type (similiarty) of songs. First, search of optimal hyperparameters for DBSCAN is run and the best results produce a silhouette score of 0.76 which is 0.24 improvement compared to K-means. Then the Hnswlib Nearest Neighbor, which aims at improving the speed and performance of ANNOY, finds the neighbors inside the given cluster. At the end, performance when it comes to recall and speed are summarized: Recall of 1.00 while the Hnswlib query time of 0.000108 seconds which is faster ANNOY time: 0.000185 seconds and much faster than exhaustive query time: 0.004947 seconds.
  
 ### Matrix Factorization using SVD
 The Matrix Factorization system aims to generate recommendations using SVD. In addition, it uses cosine similarity to find similar songs. It has the following principal steps:
