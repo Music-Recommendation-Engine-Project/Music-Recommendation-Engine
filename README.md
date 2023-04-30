@@ -100,9 +100,9 @@ When the model is trained, biases, factors, and lookup table (to retrive artists
 
 To use automatic deployment, Procfile and requirements.txt are used by Heroku to build a deployment pipeline combined with Github Actions.
 
-When the user request API service, model retirves paramteres and calculates similiar artists returning a list of strings. User specifies number of similiar artists {num_artists} requested and the name of the original artists {artist_name} based on which the model finds similiarity:
+When the user request API service, model retirves paramteres and calculates similiar artists returning a list of strings. User specifies number of similiar artists {num_artists} requested and the name of the original artists {artist_name} based on which the model finds similiarity. Example for **Queen** band with the desired number of recommended artist equal to 9.
 
-https://artist-api2023.herokuapp.com/find_similar_artists?artist={artist_name}&num_items={num_artist}
+https://artist-api2023.herokuapp.com/find_similar_artists?artist=Queen&num_items=9
 
 The model works for artists that were part of the original database. To test, use artists names such as: *Queen*. 
 
