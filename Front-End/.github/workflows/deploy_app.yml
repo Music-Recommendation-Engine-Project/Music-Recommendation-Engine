@@ -1,0 +1,31 @@
+name: Deploy to Heroku
+
+on:
+  push:
+    branches:
+      - main
+      - FrontEnd
+
+defaults:
+  run:
+    working-directory: Front-End
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Log in to Heroku Container Registry
+      run: heroku container:login
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
+    - name: Build and push Docker image
+      run: |
+        heroku container:push web --context-path .
+        heroku container:release web
+      env:
+        HEROKU_APP_NAME: song-recommender2023
