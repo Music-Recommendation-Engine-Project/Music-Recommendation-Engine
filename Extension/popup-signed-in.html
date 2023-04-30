@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="color-thief.min.js"></script>
+</head>
+<style>
+    body {
+        width: 550px;
+        height: 100px;
+        font-family: "MD Nichrome";
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+    }
+
+    #left-side {
+        width: 50%;
+        padding-right: 15px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #right-side {
+        width: 50%;
+    }
+
+    #album-cover {
+        width: 100%;
+        height: auto;
+    }
+
+    .button {
+        display: inline-block;
+        width: 100px;
+        height: 30px;
+        padding: 5px;
+        margin: 5px;
+        font-size: 10px;
+        font-weight: 500;
+        background-color: #1db954;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    .button:hover {
+        background-color: #1ed760;
+    }
+
+    .button:active {
+        background-color: #19a84b;
+    }
+
+    p {
+        font-size: 10px;
+        font-family: 'MD Nichrome';
+        color: white;
+        line-height: 1.0;
+        position: fixed;
+    }
+
+    #current-song {
+        font-size: 15px;
+        height: auto;
+        width: 100px;
+        left: 18px;
+        top: 30px;
+        margin-bottom: 20px;
+        position: relative; 
+    }
+    
+    #current-artist{
+        font-style: oblique;
+        padding-top: 20px;
+        font-size: 10px;
+        width: 100px;
+        left: 18px;
+        position: relative;
+    }
+
+    h1 {
+        color: white;
+        font-size: 15px;
+        text-align: left;
+        left: 25px;
+        position: fixed;
+    }
+    #sign-out{
+        background-color: #d32f2f;
+        align-items: center;
+        position: fixed;
+        bottom: 10px;
+        left: 85px; 
+    }
+
+    #previous{
+        bottom: 40px;
+        margin-bottom: 15px;
+        position: fixed;
+        left: 10px;
+    }
+
+    #next{
+        bottom: 40px;
+        margin-bottom: 15px;
+        position: fixed;
+        left: 160px;
+    }
+
+    #Recommended_title{
+        position: absolute;
+        left: 175px;
+        flex-wrap: wrap;
+        left: 160px;
+        width: 120px;
+        text-align: center;
+        display: inline-block;
+    }
+    #recommended-artists-list{
+        position: fixed;
+        top: 40px;
+        list-style-type: none;
+        left: 120px;
+        flex-wrap: wrap;
+        width: 120px;
+        color: white;
+        text-align: left;
+        display: inline-block;
+    }
+    ul li {
+        padding-bottom: 5px;
+        font-family: 'MD Nichrome';
+        font-size: 12.5px;
+        font-weight: 1.3
+    }
+    #recommender-engine{
+        position: fixed;
+        bottom: 0px;
+        left: 5px;
+        width: auto;
+        color: white;
+        text-align: left;
+        font-style: italic;
+        font-size: 8px;
+        line-height: 0;
+    }
+    #play-button{
+        font-size: 10px;
+        font-family: "MD Nichrome";
+        color: white;
+        text-decoration: none;
+    }
+
+</style>
+<body>
+    <div id="left-side">
+        <h1>Now Playing</h1>
+        <h1 id="Recommended_title">Recommendations*</h1>
+        <p id="current-song"></p>
+        <p id="current-artist"></p>
+        <button class="button" id="previous">Previous</button>
+        <button class="button" id="next">Next</button>
+        <button class="button" id="sign-out">Sign out</button>
+    </div>
+    <div id="right-side">
+        <img id="album-cover" src="" crossOrigin="anonymous">
+    </div>
+    <script src="./popup-signed-in-script.js"></script>
+</body>
+
+</html>

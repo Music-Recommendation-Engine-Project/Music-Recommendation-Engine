@@ -3,8 +3,6 @@
 A recommendation system for music and song recommendations is a project that uses machine learning algorithms to analyse data on user's listening habits and recommend new songs that they may be interested in. 
 Recommendation systems are widely used in the music industry. One of the reasons they have become so ubiquitous is due to the fact that online listener behaviour is characterised by cognitive biases - users prefer to take mental shortcuts rather than evaluate a large range of music choices on a daily basis. RS provides these mental shortcuts by offering personalised recommendations based on the user’s preferences.
 
-Frontend Preview: https://www.figma.com/proto/d80N8dn5vyP8Eww70624hW/Final-PC?node-id=2%3A2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A2
-
 ## Valuable Variables
 
 - Song Lyrics and Sentiment Analysis of the song
@@ -97,3 +95,28 @@ When the user request API service, model retirves paramteres and calculates simi
 https://artist-api2023.herokuapp.com/find_similar_artists?artist={artist_name}&num_items={num_artist}
 
 The model works for artists that were part of the original database. To test, use artists names such as: *Queen*. 
+# Extension
+
+In order to further productionalize the solution, a Chrome Extension has been built. The extension allows for:
+1. Log Into user Spotify Account. 
+2. Displaying current song, artist, and album cover.
+3. Controling music playback directly from extension. 
+4. For every song played, the recommended artists are provided based on Bayesian Personalized Ranking (BPR) algorithm created in this repository.
+   - If artist is not found in the database for recommendation, Spotify recommender is used instead. 
+6. Automaticly play recommended artist. 
+
+To use extension you need to have an active **Spotify** account to use this extension.
+
+Bear in mind that as of April 30th 2023, the extension is not available in the official Chrome Store yet. This is because it needs needs to be approved by the Chrome team which may take some time as all extensions are review manually. While we don't have the official decision yet, you still can use the extension using developer mode in your Chrome browser:
+1. Download the folder "Extension" from this repository. 
+2. Go to [Spotify Developer] (https://developer.spotify.com/) and get your Client_ID.
+3. In the file "background.js", encode your client_id in a corresponding variable .
+4. In your Chrome, go to More Tools->Extensions. Then enable Developer Mode, and click "Load Unpacked" and unpload the whole folder. 
+5. Your extension should receive the ID. Copy the ID and paste it in the "background.js" in an appropriate place in REDIRECT_URI variable. 
+6. In Chrome extension page, next to your uploaded extension click "Retry". 
+7. Start using extension.
+
+You can also check the demo of the extension in the vide below:
+
+https://user-images.githubusercontent.com/125658269/235351128-91824717-1a2c-45a3-99d6-3cf10181f908.mp4
+

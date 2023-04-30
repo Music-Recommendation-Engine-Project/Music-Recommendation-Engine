@@ -1,0 +1,28 @@
+{
+    "name": "Spotify OAuth2 test",
+    "description": "Testing Spotify's Oauth2 authentication.",
+    "version": "0.1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "icons": {
+        "16": "./icons/small.png",
+        "48": "./icons/medium.png"
+    },
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "identity"
+    ],
+    "host_permissions": [
+    "https://artist-api2023.herokuapp.com/*"
+    ],
+    "web_accessible_resources": [
+        {
+        "resources": ["spotify-player.html", "color-thief.min.js"],
+        "matches": ["https://*.spotify.com/*"]
+    }
+  ]
+}
