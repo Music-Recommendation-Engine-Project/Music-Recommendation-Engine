@@ -1,7 +1,11 @@
-const CLIENT_ID = encodeURIComponent('fe29fbb9fa7f4cf4b88ebf90faaeb562');
+/*
+Part of this code was inspired by: https://javascript.plainenglish.io/use-spotify-to-login-to-your-chrome-extension-d60e21271c24
+*/
+
+const CLIENT_ID = encodeURIComponent('{SPOTIFY_CLIENT_ID}');
 const RESPONSE_TYPE = encodeURIComponent('token');
 const REDIRECT_URI = encodeURIComponent(
-  'https://mjbncndfijdfgdekeidigckonomjmmfg.chromiumapp.org/'
+  `https://{extension_id}.chromiumapp.org/`
 );
 const SCOPE = encodeURIComponent(
   'user-read-email user-read-playback-state user-modify-playback-state'
