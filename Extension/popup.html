@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Extension</title>
+    <style>
+    
+    body {
+        width: 200px;
+        height: 200px;
+        font-family: "MD Nichrome";
+        background: linear-gradient(to right top, #8db9fb, #86c6f9, #8cd1f3, #9cdaec, #b2e2e7);
+    }
+    
+    .button {
+        display: block;
+        width: 95px;
+        margin-top: 20%;
+        margin-left: 25%;
+        height: 40px;
+        padding: auto;
+        font-size: 15px;
+        font-weight: bold;
+        font-style: bold;
+        background-color: blue;
+        color: white;
+        border-radius: 15px;
+        text-align: center;
+        cursor: pointer;
+        line-height: 35px;
+        transition: background-color 0.2s ease-in-out;
+    }
+    
+    .button:hover {
+        background-color: #1ed760;
+    }
+        
+    h1 {
+        padding-top: 15px;
+        font-size: 20px;
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+    <h1>Sign-In With Your Spotify Account</h1>
+    <div class="button" id='sign-in'>Sign In</div>
+    <script src="./popup-script.js"></script>
+</body>
+</html>
