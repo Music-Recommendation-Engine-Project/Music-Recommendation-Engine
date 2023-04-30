@@ -90,6 +90,8 @@ The Bayesian Personalized Ranking (BPR) model has been deployed using FastAPI, G
 
 When the model is trained, biases, factors, and lookup table (to retrive artists for which the model works) are saved and uploaded as numpy array to [Deta Space] (https://deta.space/). The choice of Deta was motivated by simplicity of connection, development flexibility, and free database/drive hosting. Aforementioned parameters are uploaded as stream of bytes. 
 
+To use automatic deployment, Procfile and requirements.txt are used by Heroku to build a deployment pipeline combined with Github Actions.
+
 When the user request API service, model retirves paramteres and calculates similiar artists returning a list of strings. User specifies number of similiar artists {num_artists} requested and the name of the original artists {artist_name} based on which the model finds similiarity:
 
 https://artist-api2023.herokuapp.com/find_similar_artists?artist={artist_name}&num_items={num_artist}
