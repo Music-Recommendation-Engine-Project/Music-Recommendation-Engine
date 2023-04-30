@@ -3,9 +3,13 @@ name: Deploy to Heroku
 on:
   push:
     branches:
-      - Deployment
       - main
-
+      - Deployment
+      
+defaults:
+  run:
+    working-directory: Deployment
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -34,4 +38,5 @@ jobs:
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: "artist-api2023"
         heroku_email: ${{ secrets.HEROKU_USERNAME }}
-        appdir: "Deployment"
+        appdir: "."
+        buildpacks: "https://github.com/heroku/heroku-buildpack-python.git"
