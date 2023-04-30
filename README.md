@@ -82,3 +82,17 @@ The Matrix Factorization system aims to generate recommendations using SVD. In a
 4)    Apply SVD
 5)    Use cosine similarity to find similarities between the songs
 
+
+## Web Application Deployment
+
+First part of productionalization of the solution is a web application hosted on Heroku and deployed with Docker and Github Actions. The application allows to:
+1. Log In to Spotify
+2. Search the artist.
+3. Get set of recommended artists using Bayesian Personalized Ranking (BPR) model deployed. 
+   * If artist was not found in the database, recommendation using Spotify recommender is retrived. 
+5. For each recommended artists, the most popular songs are provided.
+6. User can list to those songs directly inside the web application. 
+
+Application is deployed using Dockerfile and heroku.yml files. 
+
+The application can be accessed: https://song-recommender2023.herokuapp.com/ 
