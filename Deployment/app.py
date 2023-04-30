@@ -24,14 +24,6 @@ st.set_page_config(
     layout="wide"
 )
 
-st.set_option('server.enableCORS', True)
-st.set_option('server.allowWebsocketCompression', False)
-
-st.set_option('server.headers', {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-})
 
 # Initialize Spotipy
 sp_oauth = SpotifyOAuth(client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri, scope=scope)
